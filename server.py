@@ -11,12 +11,12 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    return render_template('site.html')
 
 
 @app.route('/smith-waterman')
 def smith_waterman():
-    return render_template('smith_waterman.html')
+    return render_template('site.html')
 
 
 @app.route('/smith-waterman/results', methods=['POST'])
@@ -37,7 +37,7 @@ def smith_results():
     optimal_alignments = ''
     for pair in algorithms.local_alignment.sequence_list:
         optimal_alignments = optimal_alignments + pair[0] + "\n" + pair[1] + "\n\n"
-    return render_template('smith_waterman_results.html', sequence1 = request.form['sequence1'], sequence2 = request.form['sequence2'], optimal_score = str(max_score), dynamic_matrix = algorithms.local_alignment.print_matrix(smatrix), optimal_alignments = optimal_alignments)
+    return render_template('site.html', sequence1 = request.form['sequence1'], sequence2 = request.form['sequence2'], optimal_score = str(max_score), dynamic_matrix = algorithms.local_alignment.print_matrix(smatrix), optimal_alignments = optimal_alignments)
 
 
 @app.route('/needleman-wunsch')
