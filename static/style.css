@@ -1,0 +1,226 @@
+/* A Free Design by Bryant Smith (bryantsmith.com) */
+
+html, body {
+text-align: center;
+}
+p {text-align: left;}
+
+body {
+	margin: 0;
+	padding: 0;
+	background: #FFFFFF;
+	text-align: left;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	color: #000000;
+}
+
+p {text-align: left;}
+
+*
+{
+margin: 0 auto 0 auto;
+}
+
+#page
+{
+  width:581px;
+}
+
+#header
+{
+text-align: center;
+color: #FFFFFF;
+padding-top: 30px;
+width:581px;
+height:50px;
+background-image:url(header.png);
+clear:both;
+}
+
+#content
+{
+background-image:url(content_back_shadow.png);
+background-repeat:repeat-y;
+width:581px;
+}
+
+#content #container
+{
+float:left;
+background-image:url(gradient_rectangle_back.png);
+background-repeat:repeat-x;
+background-color:#4586F1;
+width:547px;
+margin-left:14px;
+clear:both;
+}
+
+#menu
+{
+background-image:url(menu_background.png);
+height:54px;
+width:527px;
+}
+
+#menu ul {
+	padding: 0px;
+	list-style-type: none;
+	text-align:left;
+	height:40px;
+
+}
+
+#nussinov {
+	display:block;
+	float:left;
+	margin: 0px;
+	text-align:left;
+	line-height:40px;
+	color:#FFFFFF;
+	padding-right:2px;
+	font-size:12px;
+	font-weight:bold;
+	text-decoration:none;
+	width:40px;
+}
+
+#hmm {
+	display:block;
+	float:left;
+	margin: 0px;
+	text-align:left;
+	line-height:40px;
+	color:#FFFFFF;
+	padding-right:2px;
+	font-size:12px;
+	font-weight:bold;
+	text-decoration:none;
+	width:30px;
+}
+
+#phylo {
+	display:block;
+	float:left;
+	margin: 0px;
+	text-align:left;
+	line-height:40px;
+	color:#FFFFFF;
+	font-size:12px;
+	font-weight:bold;
+	text-decoration:none;
+	width:105px;
+}
+
+#needleman {
+	display:block;
+	float:left;
+	margin: 0px;
+	text-align:left;
+	line-height:40px;
+	color:#FFFFFF;
+	padding-right:2px;
+	font-size:12px;
+	font-weight:bold;
+	text-decoration:none;
+	width:115px;
+}
+
+#smith {
+	display:block;
+	float:left;
+	margin: 0px;
+	text-align:left;
+	line-height:40px;
+	color:#FFFFFF;
+	font-size:12px;
+	font-weight:bold;
+	text-decoration:none;
+	width:100px;
+}
+
+#home {
+	display:block;
+	float:left;
+	margin: 0px;
+	text-align:left;
+	line-height:40px;
+	color:#FFFFFF;
+	padding-left:40px;
+	font-size:12px;
+	font-weight:bold;
+	text-decoration:none;
+	width:40px;
+}
+
+#menu ul li a:hover{
+color:#65A9ED;
+}
+
+#content #main
+{
+display:block;
+width:527px;
+clear:both
+}
+
+#content #text
+{
+margin:0;
+padding:0;
+width:497px;
+display:block;
+background-color:#FFFFFF;
+float:left;
+min-height:400px;
+clear:both;
+padding-left:15px;
+padding-right:15px;
+}
+
+.clear {
+    clear:both;
+  }
+
+
+#content #text h1, #content #text h1 a, #content #text h1 a:visited
+{
+margin:0;
+padding:0;
+color:#093175;
+font-size:24px;
+margin-bottom:7px;
+margin-top:7px;
+}
+
+#content #text p
+{
+margin-top:5px;
+margin-bottom:5px;
+padding:0;
+}
+
+
+#footer
+{
+background-image:url(footer.png);
+background-repeat:no-repeat;
+width:581px;
+height:60px;
+font-size:11px;
+color:#C5DDFA;
+text-align:right;
+}
+
+#footer p
+{
+text-align:center;
+padding-top:20px;
+}
+
+#footer a, #footer a:visited
+{
+font-size:11px;
+color:#C5DDFA;
+text-decoration:none;
+}

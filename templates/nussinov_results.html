@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}" />
+        <title>Bioinformatics alogorithm calculator</title>
+    </head>
+    <body>
+        <div id="page">
+        	<div id="header">
+                <h1>Nussinov algorithm</h1>
+            </div>            
+        </div>
+        <div id="content">
+            <div id="container">
+                <div id="main">
+                    <div id="menu">
+                        <ul>
+                            <li><a href="/" id="home">Home</a></li>
+                            <li><a href="/smith-waterman" id="smith">Smith-Waterman</a></li>
+                            <li><a href="/needleman-wunsch" id="needleman">Needleman-Wunsch</a></li>
+                            <li><a href="/phylogenetic-tree" id="phylo">Phylogenetic tree</a></li>
+                            <li><a href="/hmm" id="hmm">HMM</a></li>
+                            <li><a href="/nussinov" id="nussinov">Nussinov</a></li>
+                        </ul>
+                    </div>
+                    <div id="text">
+                        <h1>Nussinov algo</h1>
+                        <p>explanation of equation used</p>
+                        <h1>Input values</h1>
+                        <form action="{{ url_for('nussinov_results') }}" method='POST'>
+                            <h3>Sequence</h3>
+                            <input type='text' name='sequence_input'>
+                            <input type='submit'>
+                        </form>
+                        <h1>Optimal score</h1>
+                        <p>{{ optimal_score }} </p>
+                        <h1>Dynamic programming matrix</h1>
+                        <pre>{{ dynamic_matrix }} </pre>
+                        <h1>Optimal alignments</h1>
+                        <pre>{{ optimal_alignments }} </pre>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div id="footer">
+                <p><a href="http://www.bryantsmith.com/template">adapted from free template provided</a> by <a href="http://www.bryantsmith.com">Bryant Smith</a></p>
+            </div>
+        </div>
+    </body>
+</html>
