@@ -1,4 +1,4 @@
-### H3**Local web application**
+### **Local web application**
 
 In order to run this code: 
 * python 3.7.6 or higher should be enabled
@@ -15,7 +15,7 @@ Steps to run:
 4. navigate to: http://127.0.0.1:5000/ or the url specified by your command-line
 
 
-### H3**Smith-Waterman via command-line:**
+### **Smith-Waterman via command-line:**
 This code runs a local alignment using the Smith-Waterman algorithm. 
 Sequences must have length between 5 - 50
 
@@ -39,7 +39,7 @@ Steps to run:
   * nucleotides must be represented using only the characters A, T, C, G, U, a, t, c, g, and u
 
 
-### H3**Needleman-Wunsch via command-line:**
+### **Needleman-Wunsch via command-line:**
 
 This code runs a global alignment using the Needleman-Wunsch algorithm. 
 Sequences must have length between 5 - 50
