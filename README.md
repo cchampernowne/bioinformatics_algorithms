@@ -10,7 +10,7 @@ In order to run this code:
 
 Steps to run:
 1. via command-line, navigate to your repository
-2. use command: <python3 server.py>
+2. use command: `python3 server.py`
 3. open a web browser
 4. navigate to: http://127.0.0.1:5000/ or the url specified by your command-line
 
@@ -30,7 +30,7 @@ In order to run this code:
 
 Steps to run:
 1. via command-line, navigate to your repository
-2. use command: <python3 algorithms/local-alignment.py>
+2. use command: `python3 algorithms/local-alignment.py`
 3. enter two sequences to be aligned, using the following formatting requirements:
   * sequence lengths must be between 5 - 50
   * sequences must not have spaces, or any other characters between nucleotides
@@ -53,7 +53,7 @@ In order to run this code:
 
 Steps to run:
 1. via command-line, navigate to your repository
-2. use command: <python3 algorithms/global-alignment.py>
+2. use command: `python3 algorithms/global-alignment.py`
 3. enter two sequences to be aligned, using the following formatting requirements:
   * sequence lengths must be between 5 - 50
   * sequences must not have spaces, or any other characters between nucleotides
