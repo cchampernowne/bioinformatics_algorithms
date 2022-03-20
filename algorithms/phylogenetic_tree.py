@@ -113,7 +113,7 @@ def truncate(num, digits):
 
 
 def get_sequences(fasta_input):  # retrieve sequences from file and return a list of all given sequences
-    valid_sequence = re.compile(r"^(\r|\n| )*(>.*(\r|\n)(A|T|C|G|U)*(\r|\n| )*)*$")
+    valid_sequence = re.compile(r"^(\r|\n| )*(>.*(\r|\n)(A|T|C|G|U|a|t|c|g|u)*(\r|\n| )*)*$")
     if re.fullmatch(valid_sequence, str(fasta_input)):
         raw_list = fasta_input.split('>')
         raw_list.pop(0)

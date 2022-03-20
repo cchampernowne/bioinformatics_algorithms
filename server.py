@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template
-from algorithms.local_alignment import server_results as local_results
+from algorithms.local_alignment import server_results as local_results, ERROR_MSG as ERROR_ALIGNMENT
 from algorithms.global_alignment import server_results as global_results
 from algorithms.phylogenetic_tree import server_results as upgma_results
 from algorithms.hmm import server_results as hidden_mm_results
@@ -23,7 +23,7 @@ def smith_waterman():
 def smith_results():
     results = local_results(request.form['sequence1'], request.form['sequence2'])
     if results == False:
-        return render_template('smith_waterman_error.html', sequence1 = request.form['sequence1'], sequence2 = request.form['sequence2'])
+        return render_template('smith_waterman_error.html', sequence1 = request.form['sequence1'], sequence2 = request.form['sequence2'], error_msg = ERROR_ALIGNMENT)
     return render_template('smith_waterman_results.html', sequence1 = request.form['sequence1'], sequence2 = request.form['sequence2'], optimal_score = results[0], dynamic_matrix = results[1], optimal_alignments = results[2])
 
 
@@ -36,7 +36,7 @@ def needleman_wunsch():
 def needleman_results():
     results = global_results(request.form['sequence1'], request.form['sequence2'])
     if results == False:
-        return render_template('needleman_wunsch_error.html', sequence1 = request.form['sequence1'], sequence2 = request.form['sequence2'])
+        return render_template('needleman_wunsch_error.html', sequence1 = request.form['sequence1'], sequence2 = request.form['sequence2'], error_msg = ERROR_ALIGNMENT)
     return render_template('needleman_wunsch_results.html', sequence1 = request.form['sequence1'], sequence2 = request.form['sequence2'], optimal_score = results[0], dynamic_matrix = results[1], optimal_alignments = results[2])
 
 
