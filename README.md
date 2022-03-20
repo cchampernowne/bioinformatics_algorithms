@@ -3,10 +3,10 @@
 In order to run this code: 
 * python 3.7.6 or higher should be enabled
 * required libraries:
- * flask
- * numpy
- * re
- * pandas
+  * flask
+  * numpy
+  * re
+  * pandas
 
 Steps to run:
 1. via command-line, navigate to your repository
@@ -27,16 +27,16 @@ In order to run this code:
 * the input file must be located in the same folder as the executable
 * the command prompt location should be in the same folder as the executable
 * required libraries:
- * numpy
- * re
+  * numpy
+  * re
 
 Steps to run:
 1. via command-line, navigate to /algorithms within your repository
 2. use command: <python3 algorithms/local-alignment.py>
 3. enter two sequences to be aligned, using the following formatting requirements:
- * sequence lengths must be between 5 - 50
- * sequences must not have spaces, or any other characters between nucleotides
- * nucleotides must be represented using only the characters A, T, C, G, U, a, t, c, g, and u
+  * sequence lengths must be between 5 - 50
+  * sequences must not have spaces, or any other characters between nucleotides
+  * nucleotides must be represented using only the characters A, T, C, G, U, a, t, c, g, and u
 
 
 ### H3**Needleman-Wunsch via command-line:**
@@ -52,16 +52,16 @@ In order to run this code:
 * the input file must be located in the same folder as the executable
 * the command prompt location should be in the same folder as the executable
 * required libraries:
- * numpy
- * re
+  * numpy
+  * re
 
 Steps to run:
 1. via command-line, navigate to /algorithms within your repository
 2. use command: <python3 algorithms/global-alignment.py>
 3. enter two sequences to be aligned, using the following formatting requirements:
- * sequence lengths must be between 5 - 50
- * sequences must not have spaces, or any other characters between nucleotides
- * nucleotides must be represented using only the characters A, T, C, G, U, a, t, c, g, and u
+  * sequence lengths must be between 5 - 50
+  * sequences must not have spaces, or any other characters between nucleotides
+  * nucleotides must be represented using only the characters A, T, C, G, U, a, t, c, g, and u
 
 
 **UPGMA via the command-line:**
