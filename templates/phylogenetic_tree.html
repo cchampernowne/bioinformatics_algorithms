@@ -8,7 +8,7 @@
     <body>
         <div id="page">
         	<div id="header">
-                <h1>Phylogenetic tree algorithm</h1>
+                <h1>UPGMA algorithm</h1>
             </div>            
         </div>
         <div id="content">
@@ -19,18 +19,17 @@
                             <li><a href="/" id="home">Home</a></li>
                             <li><a href="/smith-waterman" id="smith">Smith-Waterman</a></li>
                             <li><a href="/needleman-wunsch" id="needleman">Needleman-Wunsch</a></li>
-                            <li><a href="/phylogenetic-tree" id="phylo">Phylogenetic tree</a></li>
+                            <li><a href="/upgma" id="phylo">UPGMA</a></li>
                             <li><a href="/hmm" id="hmm">HMM</a></li>
                             <li><a href="/nussinov" id="nussinov">Nussinov</a></li>
                         </ul>
                     </div>
                     <div id="text">
-                        <h1>Phylogenetic tree</h1>
+                        <h1>Phylogenetic trees</h1>
                         <p>explanation of equation used</p>
                         <h1>FASTA format sequence file</h1>
                         <form action="{{ url_for('phylogenetic_tree_results') }}" method='POST'>
-                            <input type="file" name="sequence_file">
-                            <br>
+                            <textarea name="fasta_input" rows="4" cols="50"></textarea>
                             <br>
                             <input type='submit'>
                         </form>

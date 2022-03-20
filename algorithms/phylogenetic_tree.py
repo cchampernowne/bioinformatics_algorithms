@@ -1,6 +1,7 @@
 import numpy as np
 import sys
 import pandas as pd
+import re
 
 
 np.set_printoptions(threshold=np.inf)
@@ -90,6 +91,18 @@ def main():
     f.close()
 
 
+def server_results(fasta_input):
+    sequence_dict = get_sequences(fasta_input)
+    if sequence_dict != False:
+        smatrix, node_dict = create_matrix(sequence_dict)
+        upgma(smatrix, node_dict)
+        phylogenetic_trees = ""
+        for tree in tree_list:
+            phylogenetic_trees = tree.tree_string(True) + "\n\n"
+        return [print_matrix(smatrix,list(sequence_dict.keys())), phylogenetic_trees]
+    return False
+
+
 def truncate(num, digits):
     split = str(num).split('.', 1)
     try:
@@ -99,19 +112,19 @@ def truncate(num, digits):
     return float(str(split[0]) + '.' + str(split[1]))
 
 
-def get_sequences(file_name):  # retrieve sequences from file and return a list of all given sequences
-    f = open(file_name)
-    raw_list = f.read().split('>')
-    f.close()
-
-    raw_list.pop(0)
-    sequence_dict = {}
-
-    for ele in raw_list:
-        temp_list = ele.split('\n', 1)
-        sequence_dict[temp_list[0].replace('S', '')] = temp_list[1].replace('\n', '')
-
-    return sequence_dict
+def get_sequences(fasta_input):  # retrieve sequences from file and return a list of all given sequences
+    valid_sequence = re.compile(r"^(\r|\n| )*(>.*(\r|\n)(A|T|C|G|U)*(\r|\n| )*)*$")
+    if re.fullmatch(valid_sequence, str(fasta_input)):
+        raw_list = fasta_input.split('>')
+        raw_list.pop(0)
+        sequence_dict = {}
+        n = 1
+        for ele in raw_list:
+            temp_list = ele.split('\n', 1)
+            sequence_dict[str(n)] = temp_list[1].replace('\n', '').replace(' ', '')
+            n = n + 1
+        return sequence_dict
+    return False
 
 
 def min_diff(smatrix):  # get val and list of labels of all locations of min val

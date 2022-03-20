@@ -1,6 +1,7 @@
 import numpy as np
 import sys
 import pandas as pd
+import re
 
 
 np.set_printoptions(threshold=np.inf)
@@ -36,14 +37,6 @@ def main():
     f.write(seq + '\n' + str(top_structs[0][1]) + '\n' + top_structs[0][0])
     f.close()
 
-    # Q 5.b
-    f = open("5.o2", "w+")
-    if len(same_scores) > 1:
-        f.write('YES')
-    else:
-        f.write('NO')
-    f.close()
-
      # Q 5.c
     to_write = str(len(same_scores))
     for struct in same_scores: to_write+= '\n' + struct
@@ -57,6 +50,32 @@ def main():
     f = open("5.o4", "w+")
     f.write(to_write)
     f.close()
+
+
+def server_results(seq):
+    valid_sequence = re.compile(r"^(A|T|C|G|U)*$")
+    if re.fullmatch(valid_sequence, seq):
+        smatrix, pmatrix = create_matrices(seq)
+
+        dot_bracket = []
+        dot_bracket = ['-' for i in range(len(seq))]
+
+        traceback(len(seq)-1,0,dot_bracket,smatrix,pmatrix,0,seq)
+
+        global struct_list
+        string_list = all_dot_brackets(struct_list)
+
+        templ = []
+        for ele in string_list:
+            if ele[1] + round(struct_energy(ele[0]),1) < 0:
+                templ.append([ele[0],ele[1] + round(struct_energy(ele[0]),1)])
+
+        top_structs = sorted(templ, key=lambda ele: ele[1])[:10]
+
+        to_write = ""
+        for struct in top_structs: to_write+= '\n' + struct[0] + ' ' + str(struct[1])
+        return to_write
+    return False
 
 
 def struct_energy(dot_bracket):  # predict the loop penalty for a given structure

@@ -1,5 +1,6 @@
 import numpy as np
 import sys
+import re
 
 
 np.set_printoptions(threshold=np.inf)
@@ -48,6 +49,26 @@ def main():
         print('OPTIMAL ALLIGNMENTS:')
         for pair in sequence_list:
             print(pair[0] + '\n' + pair[1] + '\n')
+
+
+def server_results(s1, s2):
+    valid_sequence = re.compile(r"^(A|T|C|G|U)*$")
+    if re.fullmatch(valid_sequence, s1) and re.fullmatch(valid_sequence, s2):
+        smatrix = create_matrix(s1, s2)
+        seq1 = ''
+        seq2 = ''
+        j = len(s1)
+        i = len(s2)
+        s1 = '-' + s1
+        s2 = '-' + s2
+        max_coords, max_score = max_coordinants(i,j,smatrix)
+        for coord in max_coords:
+            trace_paths(coord, s1, s2, seq1, seq2, smatrix)
+        optimal_alignments = ''
+        for pair in sequence_list:
+            optimal_alignments = optimal_alignments + pair[0] + "\n" + pair[1] + "\n\n"
+        return [str(max_score), print_matrix(smatrix), optimal_alignments]
+    return False
 
 
 def get_sequences(file_name):  # retrieve s1 and s2 from given file (typically sequences.in)

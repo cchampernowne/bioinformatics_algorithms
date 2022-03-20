@@ -1,6 +1,7 @@
 import numpy as np
 import sys
 import pandas as pd
+import re
 
 
 np.set_printoptions(threshold=np.inf)
@@ -49,6 +50,23 @@ def main():
     for path in paths:
         f.write(path + '\n')
     f.close()
+
+
+def server_results(seq):
+    valid_sequence = re.compile(r"^(A|T|C|G|U)*$")
+    if re.fullmatch(valid_sequence, seq):
+        fprob, hpost, lpost = forward_algorithm(seq)  # 'GGCA' for provided output files
+        lvmatrix = log_viterbi_algorithm_matrix(seq)
+        paths, mul = most_prob_path(lvmatrix,seq)
+        vprob = viterbi_algorithm(seq)
+        x_probability = "{:.2e}".format(fprob).replace("e-0", "e-")
+        viterbi = print_matrix(lvmatrix,seq)
+        most_prob_paths = ""
+        for path in paths:
+            most_prob_paths = most_prob_paths + path + '\n\n'
+        most_prob_probability = "{:.2e}".format(vprob).replace("e-0", "e-")
+        return [x_probability, viterbi, most_prob_paths, most_prob_probability]
+    return False
 
 
 def print_matrix(matrix, seq):  # return the smatrix as a string for q 1)b

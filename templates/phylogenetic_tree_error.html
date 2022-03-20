@@ -29,7 +29,7 @@
                         <p>explanation of equation used</p>
                         <h1>FASTA format sequence file</h1>
                         <form action="{{ url_for('phylogenetic_tree_results') }}" method='POST'>
-                            <textarea name="fasta_input" rows="4" cols="50" value={{ fasta_input }}> </textarea>
+                            <textarea name="fasta_input" rows="4" cols="50">{{ fasta_input }}</textarea>
                             <br>
                             <input type='submit'>
                         </form>

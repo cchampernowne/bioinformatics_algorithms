@@ -19,7 +19,7 @@
                             <li><a href="/" id="home">Home</a></li>
                             <li><a href="/smith-waterman" id="smith">Smith-Waterman</a></li>
                             <li><a href="/needleman-wunsch" id="needleman">Needleman-Wunsch</a></li>
-                            <li><a href="/phylogenetic-tree" id="phylo">Phylogenetic tree</a></li>
+                            <li><a href="/upgma" id="phylo">UPGMA</a></li>
                             <li><a href="/hmm" id="hmm">HMM</a></li>
                             <li><a href="/nussinov" id="nussinov">Nussinov</a></li>
                         </ul>
@@ -30,7 +30,7 @@
                         <h1>Input value</h1>
                         <form action="{{ url_for('hmm_results') }}" method='POST'>
                             <h3>Sequence</h3>
-                            <input type='text' name='sequence_input'>
+                            <input type='text' name='sequence_input' value={{ sequence_input }}>
                             <input type='submit'>
                         </form>
                         <h1>Probability X</h1>

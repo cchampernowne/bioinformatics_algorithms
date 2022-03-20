@@ -1,5 +1,6 @@
 import numpy as np
 import sys
+import re
 
 
 np.set_printoptions(threshold=np.inf)
@@ -35,6 +36,23 @@ def main():
     for pair in sequence_list:
         f.write(pair[0] + '\n' + pair[1] + '\n\n')
     f.close()
+
+
+def server_results(s1, s2):
+    valid_sequence = re.compile(r"^(A|T|C|G|U)*$")
+    if re.fullmatch(valid_sequence, s1) and re.fullmatch(valid_sequence, s2):
+        smatrix = create_matrix(s1, s2)
+        seq1 = ''
+        seq2 = ''
+        j = len(s1)
+        i = len(s2)
+        max_score = smatrix[i,j][0]
+        trace_paths(i, j, s1, s2, seq1, seq2, smatrix)
+        optimal_alignments = ""
+        for pair in sequence_list:
+            optimal_alignments = optimal_alignments + pair[0] + "\n" + pair[1] + "\n\n"
+        return [str(max_score), print_matrix(smatrix), optimal_alignments]
+    return False
 
 
 def get_sequences(file_name):  # retrieve s1 and s2 from given file (typically sequences.in)
