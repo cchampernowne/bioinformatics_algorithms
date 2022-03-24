@@ -1,12 +1,11 @@
 import numpy as np
-import sys
 import pandas as pd
 import re
 
 
 np.set_printoptions(threshold=np.inf)
-tree_list = []
-
+ERROR_MSG = "\nERROR!\nInput not understood.\n - Sequence lengths must be between 5 - 200\n - Sequences must not have spaces, or any other characters between nucleotides\n - Nucleotides must be represented using only the characters A, T, C, G, U, a, t, c, g, and u.\n\nPlease try again,\n"
+SERVER_ERROR_MSG = "CHANGE LATER!! not proper FASTA format"
 
 class Node():
     def __init__(self, name):
@@ -74,33 +73,72 @@ class Node():
 
 
 def main():
-    sequence_dict = get_sequences(sys.argv[1])
+    tree_list = []
+    sequence_dict = get_sequences()
+    if not sequence_dict:
+        print('GOODBYE :)')
+        return
     smatrix, node_dict = create_matrix(sequence_dict)
-    upgma(smatrix, node_dict)
-
-    # pairwise distance matrix
-    f = open("3.o1", "w+")
-    f.write(print_matrix(smatrix,list(sequence_dict.keys())))
-    f.close()
-
-    # phylogenetic trees
-    f = open("3.o4", "w+")
-    f.write(str(len(tree_list)) + '\n')
+    upgma(smatrix, node_dict, tree_list)
+    print('\nRESULTS:\nPAIRWISE DISTANCE MATRIX:\n' + print_matrix(smatrix,list(sequence_dict.keys())) + '\nPHYLOGENETIC TREE(S):')
     for tree in tree_list:
-        f.write(tree.tree_string(True) + '\n\n')
-    f.close()
+        print(tree.tree_string(True) + '\n')
 
 
 def server_results(fasta_input):
-    sequence_dict = get_sequences(fasta_input)
-    if sequence_dict != False:
+    tree_list = []
+    sequence_dict = fasta_to_sequences(fasta_input)
+    if sequence_dict is not False:
         smatrix, node_dict = create_matrix(sequence_dict)
-        upgma(smatrix, node_dict)
+        upgma(smatrix, node_dict, tree_list)
         phylogenetic_trees = ""
-        for tree in tree_list:
-            phylogenetic_trees = tree.tree_string(True) + "\n\n"
+        for tree in tree_list: phylogenetic_trees = tree.tree_string(True) + "\n\n"
         return [print_matrix(smatrix,list(sequence_dict.keys())), phylogenetic_trees]
     return False
+
+
+def get_sequences():
+    n = 1
+    sequence_dict = {}
+    usr_input = interperate_input(input('Enter the first sequence,\nor press Q to quit:'), False)
+    if not usr_input:
+        return False
+    sequence_dict[str(n)] = usr_input.strip()
+    while True:
+        n += 1
+        if 10 < n:
+            return sequence_dict
+        if 3 < n:
+            usr_input = interperate_input(input('Enter the next sequence,\nor press Q to quit,\nor press C to continue:'), True)
+            if not usr_input:
+                return False
+            if isinstance(usr_input, str):
+                sequence_dict[str(n)] = usr_input.strip()
+                continue
+            return sequence_dict
+        else:
+            usr_input = interperate_input(input('Enter the next sequence,\nor press Q to quit:'), False)
+            if not usr_input:
+                return False
+            if isinstance(usr_input, str):
+                sequence_dict[str(n)] = usr_input.strip()
+                continue
+
+
+def interperate_input(usr_input, can_continue):
+    re_quit = re.compile(r"^ *(Q|q) *$")
+    re_continue = re.compile(r"^ *(C|c) *$")
+    re_valid_seq = re.compile(r"^ *(A|T|C|G|U|a|t|c|g|u)* *$")
+    if re.fullmatch(re_quit, usr_input):
+        return False
+    if can_continue and re.fullmatch(re_continue, usr_input):
+        return True
+    if re.fullmatch(re_valid_seq, usr_input) and 4 < len(usr_input.strip()) < 201:
+        return usr_input
+    if can_continue:
+        return interperate_input(input(ERROR_MSG + 'or press Q to quit,\n or press C to continue:'), True)
+    else:
+        return interperate_input(input(ERROR_MSG + 'or press Q to quit:'), False)
 
 
 def truncate(num, digits):
@@ -112,7 +150,7 @@ def truncate(num, digits):
     return float(str(split[0]) + '.' + str(split[1]))
 
 
-def get_sequences(fasta_input):  # retrieve sequences from file and return a list of all given sequences
+def fasta_to_sequences(fasta_input):  # retrieve sequences from file and return a list of all given sequences
     valid_sequence = re.compile(r"^(\r|\n| )*(>.*(\r|\n)(A|T|C|G|U|a|t|c|g|u)*(\r|\n| )*)*$")
     if re.fullmatch(valid_sequence, str(fasta_input)):
         raw_list = fasta_input.split('>')
@@ -123,6 +161,11 @@ def get_sequences(fasta_input):  # retrieve sequences from file and return a lis
             temp_list = ele.split('\n', 1)
             sequence_dict[str(n)] = temp_list[1].replace('\n', '').replace(' ', '')
             n = n + 1
+        if not 2 < len(sequence_dict) < 11:
+            return False
+        for seq in sequence_dict.items():
+            if 4 < len(seq) < 201:
+                return False
         return sequence_dict
     return False
 
@@ -138,7 +181,6 @@ def min_diff(smatrix):  # get val and list of labels of all locations of min val
             elif smatrix.loc[index, column] == min_val:
                 if [column,index] not in min_label_list:
                     min_label_list.append([index,column])
-
     return min_val, min_label_list
 
 
@@ -243,7 +285,7 @@ def dict_copy(node_dict):
     return copy_dict
 
 
-def upgma(smatrix,node_dict):
+def upgma(smatrix, node_dict, tree_list):
     min_val, min_label_list = min_diff(smatrix)
     for index, column in min_label_list:
         copy_dict = dict_copy(node_dict)
@@ -260,10 +302,9 @@ def upgma(smatrix,node_dict):
         nmatrix = new_matrix(smatrix,copy_dict)
 
         if len(copy_dict) <= 1:
-            global tree_list
             tree_list.append(list(copy_dict.values())[0])
             return
-        upgma(nmatrix, copy_dict)
+        upgma(nmatrix, copy_dict, tree_list)
 
 
 if __name__ == "__main__":
