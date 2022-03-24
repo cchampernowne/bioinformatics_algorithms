@@ -33,27 +33,27 @@ def main():
             same_scores.append(struct[0])
 
     # Q 5.a
-    f = open("5.o1", "w+")
+    f = open('5.o1', 'w+')
     f.write(seq + '\n' + str(top_structs[0][1]) + '\n' + top_structs[0][0])
     f.close()
 
      # Q 5.c
     to_write = str(len(same_scores))
     for struct in same_scores: to_write+= '\n' + struct
-    f = open("5.o3", "w+")
+    f = open('5.o3', 'w+')
     f.write(to_write)
     f.close()
 
     # Q 5.d
     to_write = seq
     for struct in top_structs: to_write+= '\n' + struct[0] + ' ' + str(struct[1])
-    f = open("5.o4", "w+")
+    f = open('5.o4', 'w+')
     f.write(to_write)
     f.close()
 
 
 def server_results(seq):
-    valid_sequence = re.compile(r"^(A|T|C|G|U)*$")
+    valid_sequence = re.compile(r'^(A|T|C|G|U)*$')
     if re.fullmatch(valid_sequence, seq):
         smatrix, pmatrix = create_matrices(seq)
 
@@ -72,7 +72,7 @@ def server_results(seq):
 
         top_structs = sorted(templ, key=lambda ele: ele[1])[:10]
 
-        to_write = ""
+        to_write = ''
         for struct in top_structs: to_write+= '\n' + struct[0] + ' ' + str(struct[1])
         return to_write
     return False
@@ -218,5 +218,5 @@ def create_matrices(seq):  # create matrix using nussinov algorithm
     return smatrix, pmatrix
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

@@ -1,35 +1,35 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}" />
+        <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+        <link rel='stylesheet' type='text/css' href='{{ url_for('static', filename='style.css')}}' />
         <title>Bioinformatics alogorithm calculator</title>
     </head>
     <body>
-        <div id="page">
-        	<div id="header">
+        <div id='page'>
+        	<div id='header'>
                 <h1>UPGMA algorithm</h1>
             </div>            
         </div>
-        <div id="content">
-            <div id="container">
-                <div id="main">
-                    <div id="menu">
+        <div id='content'>
+            <div id='container'>
+                <div id='main'>
+                    <div id='menu'>
                         <ul>
-                            <li><a href="/" id="home">Home</a></li>
-                            <li><a href="/smith-waterman" id="smith">Smith-Waterman</a></li>
-                            <li><a href="/needleman-wunsch" id="needleman">Needleman-Wunsch</a></li>
-                            <li><a href="/upgma" id="phylo">UPGMA</a></li>
-                            <li><a href="/hmm" id="hmm">HMM</a></li>
-                            <li><a href="/nussinov" id="nussinov">Nussinov</a></li>
+                            <li><a href='/' id='home'>Home</a></li>
+                            <li><a href='/smith-waterman' id='smith'>Smith-Waterman</a></li>
+                            <li><a href='/needleman-wunsch' id='needleman'>Needleman-Wunsch</a></li>
+                            <li><a href='/upgma' id='phylo'>UPGMA</a></li>
+                            <li><a href='/hmm' id='hmm'>HMM</a></li>
+                            <li><a href='/nussinov' id='nussinov'>Nussinov</a></li>
                         </ul>
                     </div>
-                    <div id="text">
+                    <div id='text'>
                         <h1>Phylogenetic trees</h1>
                         <p>explanation of equation used</p>
                         <h1>FASTA format sequence file</h1>
-                        <form action="{{ url_for('phylogenetic_tree_results') }}" method='POST'>
-                            <textarea name="fasta_input" rows="4" cols="50">{{ fasta_input }}</textarea>
+                        <form action='{{ url_for('phylogenetic_tree_results') }}' method='POST'>
+                            <textarea name='fasta_input' rows='4' cols='50'>{{ fasta_input }}</textarea>
                             <br>
                             <input type='submit'>
                         </form>
@@ -38,9 +38,9 @@
                     </div>
                 </div>
             </div>
-            <div class="clear"></div>
-            <div id="footer">
-                <p><a href="http://www.bryantsmith.com/template">adapted from free template provided</a> by <a href="http://www.bryantsmith.com">Bryant Smith</a></p>
+            <div class='clear'></div>
+            <div id='footer'>
+                <p><a href='http://www.bryantsmith.com/template'>adapted from free template provided</a> by <a href='http://www.bryantsmith.com'>Bryant Smith</a></p>
             </div>
         </div>
     </body>

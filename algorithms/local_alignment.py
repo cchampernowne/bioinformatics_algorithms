@@ -3,7 +3,7 @@ import re
 
 
 np.set_printoptions(threshold=np.inf)
-ERROR_MSG = "One or both of your sequences is incorrectly formatted:\n - Sequence lengths must be between 5 - 50\n - Sequences must not have spaces, or any other characters between nucleotides\n - Nucleotides must be represented using only the characters A, T, C, G, U, a, t, c, g, and u"
+ERROR_MSG = 'One or both of your sequences is incorrectly formatted:\n - Sequence lengths must be between 5 - 50\n - Sequences must not have spaces, or any other characters between nucleotides\n - Nucleotides must be represented using only the characters A, T, C, G, U, a, t, c, g, and u'
 
 
 def main():
@@ -25,7 +25,7 @@ def main():
         for pair in sequence_list:
             print(pair[0] + '\n' + pair[1] + '\n')
     else:
-        print("\nERROR!\n" + ERROR_MSG)
+        print('\nERROR!\n' + ERROR_MSG)
 
 
 def server_results(s1, s2):
@@ -43,7 +43,7 @@ def server_results(s1, s2):
             trace_paths(coord, s1, s2, seq1, seq2, smatrix, sequence_list)
         optimal_alignments = ''
         for pair in sequence_list:
-            optimal_alignments = optimal_alignments + pair[0] + "\n" + pair[1] + "\n\n"
+            optimal_alignments = optimal_alignments + pair[0] + '\n' + pair[1] + '\n\n'
         return [str(max_score), print_matrix(smatrix), optimal_alignments]
     return False
 

@@ -4,8 +4,8 @@ import re
 
 
 np.set_printoptions(threshold=np.inf)
-ERROR_MSG = "\nERROR!\nInput not understood.\n - Sequence lengths must be between 5 - 200\n - Sequences must not have spaces, or any other characters between nucleotides\n - Nucleotides must be represented using only the characters A, T, C, G, U, a, t, c, g, and u.\n\nPlease try again,\n"
-SERVER_ERROR_MSG = "CHANGE LATER!! not proper FASTA format"
+ERROR_MSG = '\nERROR!\nInput not understood.\n - Sequence lengths must be between 5 - 200\n - Sequences must not have spaces, or any other characters between nucleotides\n - Nucleotides must be represented using only the characters A, T, C, G, U, a, t, c, g, and u.\n\nPlease try again,\n'
+SERVER_ERROR_MSG = 'CHANGE LATER!! not proper FASTA format'
 
 class Node():
     def __init__(self, name):
@@ -91,8 +91,8 @@ def server_results(fasta_input):
     if sequence_dict is not False:
         smatrix, node_dict = create_matrix(sequence_dict)
         upgma(smatrix, node_dict, tree_list)
-        phylogenetic_trees = ""
-        for tree in tree_list: phylogenetic_trees = tree.tree_string(True) + "\n\n"
+        phylogenetic_trees = ''
+        for tree in tree_list: phylogenetic_trees = tree.tree_string(True) + '\n\n'
         return [print_matrix(smatrix,list(sequence_dict.keys())), phylogenetic_trees]
     return False
 
@@ -126,9 +126,9 @@ def get_sequences():
 
 
 def interperate_input(usr_input, can_continue):
-    re_quit = re.compile(r"^ *(Q|q) *$")
-    re_continue = re.compile(r"^ *(C|c) *$")
-    re_valid_seq = re.compile(r"^ *(A|T|C|G|U|a|t|c|g|u)* *$")
+    re_quit = re.compile(r'^ *(Q|q) *$')
+    re_continue = re.compile(r'^ *(C|c) *$')
+    re_valid_seq = re.compile(r'^ *(A|T|C|G|U|a|t|c|g|u)* *$')
     if re.fullmatch(re_quit, usr_input):
         return False
     if can_continue and re.fullmatch(re_continue, usr_input):
@@ -151,7 +151,7 @@ def truncate(num, digits):
 
 
 def fasta_to_sequences(fasta_input):  # retrieve sequences from file and return a list of all given sequences
-    valid_sequence = re.compile(r"^(\r|\n| )*(>.*(\r|\n)(A|T|C|G|U|a|t|c|g|u)*(\r|\n| )*)*$")
+    valid_sequence = re.compile(r'^(\r|\n| )*(>.*(\r|\n)(A|T|C|G|U|a|t|c|g|u)*(\r|\n| )*)*$')
     if re.fullmatch(valid_sequence, str(fasta_input)):
         raw_list = fasta_input.split('>')
         raw_list.pop(0)
@@ -307,5 +307,5 @@ def upgma(smatrix, node_dict, tree_list):
         upgma(nmatrix, copy_dict, tree_list)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
