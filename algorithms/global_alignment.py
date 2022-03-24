@@ -1,9 +1,9 @@
 import numpy as np
 import re
-from algorithms.local_alignment import ERROR_MSG
 
 
 np.set_printoptions(threshold=np.inf)
+ERROR_MSG = 'One or both of your sequences is incorrectly formatted:\n - Sequence lengths must be between 5 - 50\n - Sequences must not have spaces, or any other characters between nucleotides\n - Nucleotides must be represented using only the characters A, T, C, G, U, a, t, c, g, and u'
 
 
 def main():
@@ -18,16 +18,11 @@ def main():
         i = len(s2)
         max_score = smatrix[i,j][0]
         trace_paths(i, j, s1, s2, seq1, seq2, smatrix, sequence_list)
-        print('\nRESULTS:\n')
-        print('OPTIMAL SCORE:')
-        print(str(max_score) + '\n')
-        print('DYNAMIC PROGRAMMING MATRIX:')
-        print(print_matrix(smatrix) + '\n')
-        print('OPTIMAL ALLIGNMENTS:')
+        print('\nRESULTS:\n\nOPTIMAL SCORE:\n' + str(max_score) + '\n\nDYNAMIC PROGRAMMING MATRIX:\n' + print_matrix(smatrix) + '\n\nOPTIMAL ALLIGNMENTS:')
         for pair in sequence_list:
             print(pair[0] + '\n' + pair[1] + '\n')
     else:
-        print("\nERROR!\n" + ERROR_MSG)
+        print('\nERROR!\n' + ERROR_MSG)
 
 
 def server_results(s1, s2):
@@ -40,15 +35,15 @@ def server_results(s1, s2):
         i = len(s2)
         max_score = smatrix[i,j][0]
         trace_paths(i, j, s1, s2, seq1, seq2, smatrix, sequence_list)
-        optimal_alignments = ""
+        optimal_alignments = ''
         for pair in sequence_list:
-            optimal_alignments = optimal_alignments + pair[0] + "\n" + pair[1] + "\n\n"
+            optimal_alignments = optimal_alignments + pair[0] + '\n' + pair[1] + '\n\n'
         return [str(max_score), print_matrix(smatrix), optimal_alignments]
     return False
 
 
 def validity_check(s1, s2):
-    valid_sequence = re.compile(r"^(A|T|C|G|U|a|t|c|g|u)*$")
+    valid_sequence = re.compile(r'^(A|T|C|G|U|a|t|c|g|u)*$')
     if re.fullmatch(valid_sequence, s1) and re.fullmatch(valid_sequence, s2) and 4 < len(s1.strip()) < 51 and 4 < len(s2.strip()) < 51:
         return True
     return False
@@ -107,5 +102,5 @@ def trace_paths(i, j, s1, s2, seq1, seq2, smatrix, sequence_list):  # get all po
             trace_paths(i, j-1, s1[:-1], s2, s1[-1] + seq1, '-' + seq2, smatrix, sequence_list)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

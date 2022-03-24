@@ -100,7 +100,7 @@ def server_results(fasta_input):
 def get_sequences():
     n = 1
     sequence_dict = {}
-    usr_input = interperate_input(input('Enter the first sequence,\nor press Q to quit:'), False)
+    usr_input = interperate_input(input('Enter the first sequence,\nor enter Q to quit:'), False)
     if not usr_input:
         return False
     sequence_dict[str(n)] = usr_input.strip()
@@ -109,7 +109,7 @@ def get_sequences():
         if 10 < n:
             return sequence_dict
         if 3 < n:
-            usr_input = interperate_input(input('Enter the next sequence,\nor press Q to quit,\nor press C to continue:'), True)
+            usr_input = interperate_input(input('Enter the next sequence,\nor enter Q to quit,\nor enter C to continue:'), True)
             if not usr_input:
                 return False
             if isinstance(usr_input, str):
@@ -117,7 +117,7 @@ def get_sequences():
                 continue
             return sequence_dict
         else:
-            usr_input = interperate_input(input('Enter the next sequence,\nor press Q to quit:'), False)
+            usr_input = interperate_input(input('Enter the next sequence,\nor enter Q to quit:'), False)
             if not usr_input:
                 return False
             if isinstance(usr_input, str):
@@ -136,9 +136,9 @@ def interperate_input(usr_input, can_continue):
     if re.fullmatch(re_valid_seq, usr_input) and 4 < len(usr_input.strip()) < 201:
         return usr_input
     if can_continue:
-        return interperate_input(input(ERROR_MSG + 'or press Q to quit,\n or press C to continue:'), True)
+        return interperate_input(input(ERROR_MSG + 'or enter Q to quit,\n or enter C to continue:'), True)
     else:
-        return interperate_input(input(ERROR_MSG + 'or press Q to quit:'), False)
+        return interperate_input(input(ERROR_MSG + 'or enter Q to quit:'), False)
 
 
 def truncate(num, digits):

@@ -21,12 +21,7 @@ def main():
         max_coords, max_score = max_coordinants(i,j,smatrix)
         for coord in max_coords:
             trace_paths(coord, s1, s2, seq1, seq2, smatrix, sequence_list)
-        print('\nRESULTS:\n')
-        print('OPTIMAL SCORE:')
-        print(str(max_score) + '\n')
-        print('DYNAMIC PROGRAMMING MATRIX:')
-        print(print_matrix(smatrix) + '\n')
-        print('OPTIMAL ALLIGNMENTS:')
+        print('\nRESULTS:\n\nOPTIMAL SCORE:\n' + str(max_score) + '\n\nDYNAMIC PROGRAMMING MATRIX:\n' + print_matrix(smatrix) + '\n\nOPTIMAL ALLIGNMENTS:')
         for pair in sequence_list:
             print(pair[0] + '\n' + pair[1] + '\n')
     else:
@@ -54,7 +49,7 @@ def server_results(s1, s2):
 
 
 def validity_check(s1, s2):
-    valid_sequence = re.compile(r"^(A|T|C|G|U|a|t|c|g|u)*$")
+    valid_sequence = re.compile(r'^ *(A|T|C|G|U|a|t|c|g|u)* *$')
     if re.fullmatch(valid_sequence, s1) and re.fullmatch(valid_sequence, s2) and 4 < len(s1.strip()) < 51 and 4 < len(s2.strip()) < 51:
         return True
     return False
