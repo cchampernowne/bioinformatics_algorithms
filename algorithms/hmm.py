@@ -12,7 +12,7 @@ def main():
     if not seq:
         print('GOODBYE :)')
         return
-    fprob, hpost, lpost = forward_algorithm(seq)  # 'GGCA' for provided output files
+    fprob = forward_algorithm(seq)  # 'GGCA' for provided output files
     lvmatrix = log_viterbi_algorithm_matrix(seq)
     paths = most_prob_path(lvmatrix,seq)
     vprob = viterbi_algorithm(seq)
@@ -26,7 +26,7 @@ def server_results(seq):
     valid_sequence = re.compile(r'^ *(A|T|C|G|U|a|t|c|g|u)* *$')
     if re.fullmatch(valid_sequence, seq):
         seq = seq.strip()
-        fprob, hpost, lpost = forward_algorithm(seq)  # 'GGCA' for provided output files
+        fprob = forward_algorithm(seq)  # 'GGCA' for provided output files
         lvmatrix = log_viterbi_algorithm_matrix(seq)
         paths = most_prob_path(lvmatrix,seq)
         vprob = viterbi_algorithm(seq)
@@ -64,15 +64,6 @@ def print_matrix(matrix, seq):
     for column in range(len(seq)): total_matrix+= str(round(matrix.loc['L',column],1)) + ' '
     total_matrix = total_matrix[:-1]
     return total_matrix
-
-
-def get_sequence(file_name):  # retrieve sequence from file and return
-    f = open(file_name)
-    raw_list = f.read().split('\n')
-    f.close()
-    raw_list.pop(0)
-    sequence = ''.join(raw_list)
-    return sequence
 
 
 def most_prob_path(vmatrix,seq):  # calculate the most probable path as a result of viterbi algorithm. if final column in matrix has same vals, multiple paths can occur
@@ -168,7 +159,7 @@ def forward_algorithm(seq):  # performs forward algorithm
                 fmatrix.loc[state,i] = hmm_probability('init', state, seq[i])
             else:
                 fmatrix.loc[state,i] = hmm_probability('H', state, seq[i])*fmatrix.loc['H',i-1] + hmm_probability('L', state, seq[i])*fmatrix.loc['L',i-1]
-    return fmatrix.loc['L',len(seq)-1] + fmatrix.loc['H',len(seq)-1], fmatrix.loc['H',3] / (fmatrix.loc['L',3] + fmatrix.loc['H',3]), fmatrix.loc['L',3] / (fmatrix.loc['L',3] + fmatrix.loc['H',3])
+    return fmatrix.loc['L',len(seq)-1] + fmatrix.loc['H',len(seq)-1]
 
 
 def viterbi_algorithm(seq):  # perform viterbi alg with normal outputs
@@ -183,7 +174,6 @@ def viterbi_algorithm(seq):  # perform viterbi alg with normal outputs
                 vmatrix.loc[state,i] = hmm_probability('H', state, seq[i]) * vmatrix.loc['H',i-1]
             else:
                 vmatrix.loc[state,i] = hmm_probability('L', state, seq[i]) * vmatrix.loc['L',i-1]
-
     return max(vmatrix.loc['L',len(seq)-1],vmatrix.loc['H',len(seq)-1])
 
 

@@ -3,7 +3,7 @@ from algorithms.local_alignment import server_results as local_results, ERROR_MS
 from algorithms.global_alignment import server_results as global_results
 from algorithms.phylogenetic_tree import server_results as upgma_results, SERVER_ERROR_MSG as ERROR_UPGMA
 from algorithms.hmm import server_results as hidden_mm_results, ERROR_MSG as ERROR_HMM
-from algorithms.nussinov import server_results as nuss_results
+from algorithms.nussinov import server_results as nuss_results, ERROR_MSG as ERROR_NUSS
 
 
 app = Flask(__name__)
@@ -75,7 +75,7 @@ def nussinov():
 def nussinov_results():
     results = nuss_results(request.form['sequence_input'])
     if results == False:
-        return render_template('nussinov_error.html', sequence_input = request.form['sequence_input'])
+        return render_template('nussinov_error.html', sequence_input = request.form['sequence_input'], error_msg = ERROR_NUSS)
     return render_template('nussinov_results.html', sequence_input = request.form['sequence_input'], structures_ranked = results)
 
 
