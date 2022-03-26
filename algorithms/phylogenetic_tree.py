@@ -4,8 +4,8 @@ import re
 
 
 np.set_printoptions(threshold=np.inf)
-ERROR_MSG = '\nERROR!\nInput not understood.\n - Sequence lengths must be between 5 - 200\n - Sequences must not have spaces, or any other characters between nucleotides\n - Nucleotides must be represented using only the characters A, T, C, G, U, a, t, c, g, and u.\n\nPlease try again,\n'
-SERVER_ERROR_MSG = 'CHANGE LATER!! not proper FASTA format'
+ERROR_MSG = '\nERROR!\nInput not understood.\n - Sequence lengths must be between 5 - 200\n - Sequences must not have spaces, or any other characters between nucleotides\n - Nucleotides must be represented using only the characters A, T, C, G, U, a, t, c, g, and u.\n\nPlease try again'
+SERVER_ERROR_MSG = 'ERROR!\n - Input must be in FASTA format\n - Sequence lengths must be between 5 - 200\n - Sequences must not have spaces, or any other characters between nucleotides\n - Nucleotides must be represented using only the characters A, T, C, G, U, a, t, c, g, and u.\n\nPlease try again'
 
 class Node():
     def __init__(self, name):
@@ -136,9 +136,9 @@ def interperate_input(usr_input, can_continue):
     if re.fullmatch(re_valid_seq, usr_input) and 4 < len(usr_input.strip()) < 201:
         return usr_input
     if can_continue:
-        return interperate_input(input(ERROR_MSG + 'or enter Q to quit,\n or enter C to continue:'), True)
+        return interperate_input(input(ERROR_MSG + ',\nor enter Q to quit,\n or enter C to continue:'), True)
     else:
-        return interperate_input(input(ERROR_MSG + 'or enter Q to quit:'), False)
+        return interperate_input(input(ERROR_MSG + ',\nor enter Q to quit:'), False)
 
 
 def truncate(num, digits):
@@ -215,16 +215,12 @@ def create_matrix(sequence_dict):  # create pairwise distance matrix of given se
     names = list(sequence_dict.keys())
     n = len(names)
     node_dict = {}
-
     for name in names:
         node_dict[name] = create_leaf(name, 0)
-
     smatrix = pd.DataFrame(np.full((n,n), -1), index=names, columns=names)
-
     for index in names:
         for column in names:
             smatrix.loc[index,column] = pos_diff(sequence_dict[index],sequence_dict[column])
-
     return smatrix, node_dict
 
 
@@ -245,7 +241,6 @@ def new_matrix(smatrix,node_dict):
     names = sorted(node_dict.keys(),key=len,reverse=True)
     m = len(node_dict)
     nmatrix = pd.DataFrame(np.full((m,m), 0), index=names, columns=names)
-
     for index in names:
         for column in names:
             if index == column:
@@ -261,7 +256,6 @@ def new_matrix(smatrix,node_dict):
                     else:
                         div += 1
                         temp_val += smatrix.loc[child.name,column]
-                
                 nmatrix.loc[index,column] = temp_val / div
             elif column not in smatrix.columns:
                 for child in node_dict[column].children_list():
@@ -271,7 +265,6 @@ def new_matrix(smatrix,node_dict):
                     else:
                         div += 1
                         temp_val += smatrix.loc[index,child.name]
-
                 nmatrix.loc[index,column] = temp_val / div
             else:
                 nmatrix.loc[index,column] = smatrix.loc[index,column]
@@ -292,15 +285,12 @@ def upgma(smatrix, node_dict, tree_list):
         left_child = copy_dict[index]
         left_child.distance = min_val/2 - left_child.left_child_dist()
         del copy_dict[index]
-
         right_child = copy_dict[column]
         right_child.distance = min_val/2 - right_child.left_child_dist()
         del copy_dict[column]
-
         ab = join_nodes(left_child, right_child)
         copy_dict[ab.name] = ab
         nmatrix = new_matrix(smatrix,copy_dict)
-
         if len(copy_dict) <= 1:
             tree_list.append(list(copy_dict.values())[0])
             return

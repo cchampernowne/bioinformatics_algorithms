@@ -3,7 +3,7 @@ import re
 
 
 np.set_printoptions(threshold=np.inf)
-ERROR_MSG = 'One or both of your sequences is incorrectly formatted:\n - Sequence lengths must be between 5 - 50\n - Sequences must not have spaces, or any other characters between nucleotides\n - Nucleotides must be represented using only the characters A, T, C, G, U, a, t, c, g, and u'
+ERROR_MSG = '\nERROR!\n\nOne or both of your sequences is incorrectly formatted.\n - Sequence lengths must be between 5 - 50.\n - Sequences must not have spaces, or any other characters between nucleotides.\n - Nucleotides must be represented using only the characters A, T, C, G, U, a, t, c, g, and u.\nPlease try again.'
 
 
 def main():

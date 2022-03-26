@@ -4,7 +4,7 @@ import re
 
 
 np.set_printoptions(threshold=np.inf)
-ERROR_MSG = '\nERROR!\nInput not understood.\n - Sequence lengths must be between 5 - 200\n - Sequences must not have spaces, or any other characters between nucleotides\n - Nucleotides must be represented using only the characters A, T, C, G, U, a, t, c, g, and u.\n\nPlease try again'
+ERROR_MSG = '\nERROR!\nInput not understood.\n - Sequence length must be between 5 - 200.\n - Sequences must not have spaces, or any other characters between nucleotides.\n - Nucleotides must be represented using only the characters A, T, C, G, U, a, t, c, g, and u.\n\nPlease try again.'
 
 
 def main():
@@ -24,9 +24,9 @@ def main():
 
 def server_results(seq):
     valid_sequence = re.compile(r'^ *(A|T|C|G|U|a|t|c|g|u)* *$')
-    if re.fullmatch(valid_sequence, seq):
+    if re.fullmatch(valid_sequence, seq) and 4 < len(seq.strip()) < 201:
         seq = seq.strip()
-        fprob = forward_algorithm(seq)  # 'GGCA' for provided output files
+        fprob = forward_algorithm(seq)
         lvmatrix = log_viterbi_algorithm_matrix(seq)
         paths = most_prob_path(lvmatrix,seq)
         vprob = viterbi_algorithm(seq)
@@ -98,7 +98,7 @@ def hmm_probability(init_state, end_state, residue):  # hardcoded probabilities 
                 prob_score = 0.5*0.3
             if residue in ('G', 'g'):
                 prob_score = 0.5*0.3
-            if residue in ('T', 't'):
+            if residue in ('T', 't', 'U', 'u'):
                 prob_score = 0.5*0.2
         if end_state == 'L':
             if residue in ('A', 'a'):
@@ -107,7 +107,7 @@ def hmm_probability(init_state, end_state, residue):  # hardcoded probabilities 
                 prob_score = 0.5*0.2
             if residue in ('G', 'g'):
                 prob_score = 0.5*0.2
-            if residue in ('T', 't'):
+            if residue in ('T', 't', 'U', 'u'):
                 prob_score = 0.5*0.3
     if init_state == 'H':
         if end_state == 'H':
@@ -117,7 +117,7 @@ def hmm_probability(init_state, end_state, residue):  # hardcoded probabilities 
                 prob_score = 0.5*0.3
             if residue in ('G', 'g'):
                 prob_score = 0.5*0.3
-            if residue in ('T', 't'):
+            if residue in ('T', 't', 'U', 'u'):
                 prob_score = 0.5*0.2
         if end_state == 'L':
             if residue in ('A', 'a'):
@@ -126,7 +126,7 @@ def hmm_probability(init_state, end_state, residue):  # hardcoded probabilities 
                 prob_score = 0.5*0.2
             if residue in ('G', 'g'):
                 prob_score = 0.5*0.2
-            if residue in ('T', 't'):
+            if residue in ('T', 't', 'U', 'u'):
                 prob_score = 0.5*0.3
     if init_state == 'L':
         if end_state == 'H':
@@ -136,7 +136,7 @@ def hmm_probability(init_state, end_state, residue):  # hardcoded probabilities 
                 prob_score = 0.4*0.3
             if residue in ('G', 'g'):
                 prob_score = 0.4*0.3
-            if residue in ('T', 't'):
+            if residue in ('T', 't', 'U', 'u'):
                 prob_score = 0.4*0.2
         if end_state == 'L':
             if residue in ('A', 'a'):
@@ -145,7 +145,7 @@ def hmm_probability(init_state, end_state, residue):  # hardcoded probabilities 
                 prob_score = 0.6*0.2
             if residue in ('G', 'g'):
                 prob_score = 0.6*0.2
-            if residue in ('T', 't'):
+            if residue in ('T', 't', 'U', 'u'):
                 prob_score = 0.6*0.3
     return prob_score
 
