@@ -1,7 +1,8 @@
 /* A Free Design by Bryant Smith (bryantsmith.com) */
 
 html, body {
-text-align: center;
+/* text-align: center; */
+overflow-x: hidden;
 }
 p {text-align: left;}
 
@@ -22,43 +23,38 @@ p {text-align: left;}
 margin: 0 auto 0 auto;
 }
 
+h1 {
+	font-size: 24px;
+}
+
 /* ......................NAVBAR........................ */
 .nav__content {
 	display: flex;
 	border-bottom: 1px solid grey;
+	/* margin: 0 50px; */
 }
 
-#page
-{
-  width:581px;
-}
 
 #header
 {
 color: black;
 padding-top: 30px;
-width:581px;
+ /* width:581px;
 height:50px;
-/* font-size: 24px; */
-/* background-image:url(header.png); */
-/* clear:both; */
+font-size: 24px;  */
 }
 
 .nav__list {
 	display: flex;
-	/* list-style-type: none; */
 }
 
 .nav__list a{
-	/* display: flex; */
-	/* list-style-type: none; */
 	text-decoration: none;
 	color: black;
+	font-size: 16px;
 }
 
 .nav__list a:hover{
-	/* display: flex; */
-	/* list-style-type: none; */
 	color: grey;
 }
 
@@ -75,13 +71,13 @@ padding-top: 30px;
 flex-direction: row; */
 }
 
-.menu ul {
+/* .menu ul { */
 	/* padding: 0px; */
 	/* list-style-type: none; */
 	/* text-align:left; */
 	/* height:40px; */
 	/* padding-top: 30px; */
-}
+/* } */
 
 .menu li {
 	margin: 0 10px;
@@ -226,7 +222,7 @@ padding-right:15px;
 margin:0;
 padding:0;
 color:#093175;
-font-size:24px;
+/* font-size:24px; */
 margin-bottom:7px;
 margin-top:7px;
 }
