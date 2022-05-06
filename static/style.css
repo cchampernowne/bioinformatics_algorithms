@@ -1,27 +1,22 @@
-/* A Free Design by Bryant Smith (bryantsmith.com) */
 
 html, body {
 /* text-align: center; */
 overflow-x: hidden;
 }
-p {text-align: left;}
 
 body {
 	margin: 0;
 	padding: 0;
 	background: #FFFFFF;
-	text-align: left;
 	font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
 	font-size: 13px;
 	color: #000000;
 }
 
-p {text-align: left;}
 
-*
-{
+/* * {
 margin: 0 auto 0 auto;
-}
+} */
 
 h1 {
 	font-size: 24px;
@@ -34,9 +29,7 @@ h1 {
 	/* margin: 0 50px; */
 }
 
-
-#header
-{
+.header {
 color: black;
 padding-top: 30px;
  /* width:581px;
@@ -58,17 +51,22 @@ font-size: 24px;  */
 	color: grey;
 }
 
-
-
-.menu
+.nav__list__container
 {
 /* background-image:url(menu_background.png); */
 /* height:54px;
 width:527px; */
 /* color: #000000; */
 padding-top: 30px;
+padding-bottom: 10px;
 /* display: flex;
 flex-direction: row; */
+}
+
+.nav__list__container li {
+	margin: 0 15px;
+	list-style-type: none;
+	list-style:none;
 }
 
 /* .menu ul { */
@@ -79,20 +77,15 @@ flex-direction: row; */
 	/* padding-top: 30px; */
 /* } */
 
-.menu li {
-	margin: 0 10px;
-	list-style-type: none;
-	list-style:none;
-}
 
-#content
+/* #content
 {
 background-image:url(content_back_shadow.png);
 background-repeat:repeat-y;
 width:581px;
-}
+} */
 
-#content #container
+/* #content #container
 {
 float:left;
 background-image:url(gradient_rectangle_back.png);
@@ -101,7 +94,7 @@ background-color:#4586F1;
 width:547px;
 margin-left:14px;
 clear:both;
-}
+} */
 
 /* #nussinov {
 	display:block;
@@ -187,18 +180,16 @@ clear:both;
 
 
 
-#menu ul li a:hover{
-color:#65A9ED;
-}
 
+/* 
 #content #main
 {
 display:block;
 width:527px;
 clear:both
-}
+} */
 
-#content #text
+/* #content #text
 {
 margin:0;
 padding:0;
@@ -211,31 +202,27 @@ clear:both;
 padding-left:15px;
 padding-right:15px;
 }
-
-.clear {
-    clear:both;
-  }
+ */
 
 
-#content #text h1, #content #text h1 a, #content #text h1 a:visited
+/* #content #text h1, #content #text h1 a, #content #text h1 a:visited
 {
 margin:0;
 padding:0;
 color:#093175;
-/* font-size:24px; */
 margin-bottom:7px;
 margin-top:7px;
-}
+} */
 
-#content #text p
+/* #content #text p
 {
 margin-top:5px;
 margin-bottom:5px;
 padding:0;
-}
+} */
 
 
-#footer
+/* #footer
 {
 background-image:url(footer.png);
 background-repeat:no-repeat;
@@ -257,4 +244,4 @@ padding-top:20px;
 font-size:11px;
 color:#C5DDFA;
 text-decoration:none;
-}
+} */
