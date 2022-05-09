@@ -2,44 +2,40 @@
 <html>
     <head>
         <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
-        <link rel='stylesheet' type='text/css' href='{{ url_for('static', filename='style.css')}}' />
-        <title>Bioinformatics alogorithm calculator</title>
+        <link rel="stylesheet" href="/static/bootstrap-4.6.1-dist/css/bootstrap.css">
+        <link rel='stylesheet' type='text/css' href='{{ url_for('static', filename='style.css')}}' >
+        <link rel='stylesheet' type='text/css' href='/static/style.css' />
+        <title>Bioinformatics Alogorithm Calculator</title>
     </head>
     <body>
-        <div id='page'>
-        	<div id='header'>
-                <h1>Hidden Markov machine</h1>
-            </div>            
-        </div>
-        <div id='content'>
-            <div id='container'>
-                <div id='main'>
-                    <div id='menu'>
-                        <ul>
-                            <li><a href='/' id='home'>Home</a></li>
-                            <li><a href='/smith-waterman' id='smith'>Smith-Waterman</a></li>
-                            <li><a href='/needleman-wunsch' id='needleman'>Needleman-Wunsch</a></li>
-                            <li><a href='/upgma' id='phylo'>UPGMA</a></li>
-                            <li><a href='/hmm' id='hmm'>HMM</a></li>
-                            <li><a href='/nussinov' id='nussinov'>Nussinov</a></li>
-                        </ul>
-                    </div>
-                    <div id='text'>
-                        <h1>Markov machines</h1>
-                        <p>explanation of equation used</p>
-                        <h1>Input value</h1>
-                        <form action='{{ url_for('hmm_results') }}' method='POST'>
-                            <h3>Sequence</h3>
-                            <input type='text' name='sequence_input'>
-                            <input type='submit'>
-                        </form>
-                    </div>
+        <nav>
+            <div class="nav__content">
+                <div class='header ml-5'>
+                    <h1>UGPMA</h1>
                 </div>
-            </div>
-            <div class='clear'></div>
-            <div id='footer'>
-                <p><a href='http://www.bryantsmith.com/template'>adapted from free template provided</a> by <a href='http://www.bryantsmith.com'>Bryant Smith</a></p>
-            </div>
+                <div class='nav__list__container ml-auto mr-5'>
+                    <ul class="nav__list">
+                        <li><a href='/templates/home.html'>Home</a></li>
+                        <li><a href='/templates/smith_waterman.html'>Smith-Waterman</a></li>
+                        <li><a href='/templates/needleman_wunsch.html'>Needleman-Wunsch</a></li>
+                        <li><a href='/templates/phylogenetic_tree.html'>UGMPA</a></li>
+                        <li><a href='/templates/nussinov.html'>Nussinov</a></li>
+                    </ul>
+                </div>
+            </div>          
+        </nav>
+        
+                   
+        <div id='text'>
+            <h1>Markov machines</h1>
+            <p>explanation of equation used</p>
+            <h1>Input value</h1>
+            <form action='{{ url_for('hmm_results') }}' method='POST'>
+                <h3>Sequence</h3>
+                <input type='text' name='sequence_input'>
+                <input type='submit'>
+            </form>
         </div>
+    
     </body>
 </html>

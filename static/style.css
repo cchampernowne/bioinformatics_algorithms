@@ -69,6 +69,12 @@ flex-direction: row; */
 	list-style:none;
 }
 
+/* ......................SMITH-WATERMAN.................... */
+
+.smith-waterman__sequences {
+	/* display: flex; */
+}
+
 /* .menu ul { */
 	/* padding: 0px; */
 	/* list-style-type: none; */
